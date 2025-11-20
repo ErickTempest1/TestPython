@@ -14,13 +14,14 @@ def test_can_get_popular_movies():
 
     def test_can_get_first_popular_movie_details():
         response = requests.get(url, headers=headers)
-        data = responde.json()
+        data = response.json()
         first_movie_id = data['results'][0]['id']
-        url_movie = f"https://api.themoviedb.org/3/movie/{first_movie_id}"
-        responde_movie = requests.get(url_movie, headers=headers)
-        assert responde_movie.status_code == 200
+        url = "https://api.themoviedb.org/3/movie/popular?language=en-us&page=1"
+        response_movie = requests.get(url_movie, headers=headers)
+        url_movie = f"https://api.themoviedb.org/3movie/{first_movie_id}"
+        assert response_movie.status_code == 200
 
-        if responde_movie.status_code !=200:
+        if response_movie.status_code !=200:
             print("Fallha ao tentar ler o primeiro teste")
-            print(responde_movie.text)
-            assert responde_movie.status_code == 200
+            print(response_movie.text)
+            assert response_movie.status_code == 200
