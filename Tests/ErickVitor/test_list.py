@@ -16,9 +16,4 @@ def test_can_get_movie_details():
     url_movie ="https://api.themoviedb.org/3/movie/550"
 
     response = requests.get(url_movie, headers=headers)
-    
-    if response.status_code != 200:
-        print("Falha ao tentar ler o filme decima segunda vez:")
-        print(response.text)
-        
     assert response.status_code == 200

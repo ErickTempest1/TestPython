@@ -16,7 +16,3 @@ def test_can_get_first_popular_movie_details():
     url = "https://api.themoviedb.org/3/movie/634649?language=en-US"
     response = requests.get(url, headers=headers)
     assert response.status_code == 200
-
-    if response.status_code == 200:
-        print("Detalhes do filme")
-        print(response.json())
