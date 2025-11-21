@@ -1,6 +1,6 @@
 # 🎬 Automação de Testes de API - TMDB
 
-Este repositório contém um projeto de **QA Automation (Backend)** desenvolvido para validar os endpoints da API do [The Movie Database (TMDB)](https://www.themoviedb.org/).
+Este repositório contém um projeto de **QA Estudante (Backend)** desenvolvido para validar os endpoints da API do [The Movie Database (TMDB)](https://www.themoviedb.org/).
 
 O objetivo foi criar uma suíte de testes regressivos utilizando **Python** e **Pytest**, garantindo a integridade de dados de filmes, séries e funcionalidades de conta.
 
