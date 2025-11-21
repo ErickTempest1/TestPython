@@ -9,6 +9,7 @@ headers = {
 }
 
 def test_can_get_tv_series_changes():
+    url = "https://api.themoviedb.org/3/tv/1399/changes?page=1"
     response = requests.get(url, headers=headers)
     assert response.status_code == 200
 
