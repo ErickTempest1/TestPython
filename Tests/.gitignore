@@ -1,0 +1,3 @@
+echo "__pycache__/" >> tests/.gitignore
+echo "*.pyc" >> tests/.gitignore
+echo ".DS_Store" >> tests/.gitignore
