@@ -1,28 +1,62 @@
 # 🎬 Automação de Testes de API - TMDB
 
-Este repositório contém um projeto de estudos focado em **Automação de Testes de Backend** utilizando a API do [The Movie Database (TMDB)](https://www.themoviedb.org/).
+Este repositório contém um projeto de **QA Automation (Backend)** desenvolvido para validar os endpoints da API do [The Movie Database (TMDB)](https://www.themoviedb.org/).
 
-O objetivo é validar a integridade das requisições HTTP, garantindo que a autenticação e o retorno de dados estejam funcionando conforme o esperado.
+O objetivo foi criar uma suíte de testes regressivos utilizando **Python** e **Pytest**, garantindo a integridade de dados de filmes, séries e funcionalidades de conta.
 
 ## 🚀 Tecnologias Utilizadas
 
-* **Python 3.12**: Linguagem base do projeto.
-* **Pytest**: Framework para execução e asserção dos testes.
-* **Requests**: Biblioteca para realizar as chamadas HTTP (GET).
-* **Git/GitHub**: Controle de versão.
+* **Linguagem:** Python 3.12+
+* **Framework de Teste:** Pytest
+* **Requisições HTTP:** Requests Library
+* **Controle de Versão:** Git & GitHub
+* **Padrão de Projeto:** Testes funcionais isolados por domínio.
 
-## 🧪 Cenários de Teste Cobertos
+## 🧪 Cobertura dos Testes
 
-O script valida os seguintes comportamentos da API:
+O projeto valida os principais fluxos da API, incluindo:
 
-| Tipo de Teste | Verbo HTTP | Descrição | Status Esperado |
-| :--- | :---: | :--- | :---: |
-| **Health Check** | `GET` | Valida se o Token de autenticação (Bearer) é aceito pela API. | **200 OK** |
-| **Contrato de Dados** | `GET` | Consulta um filme específico (ID 550 - Clube da Luta) e valida se o título retornado está correto. | **200 OK** |
+| Domínio | Arquivo de Teste | Cenários Cobertos |
+| :--- | :--- | :--- |
+| **Filmes Populares** | `test_popular.py` | Listagem de populares e validação dinâmica de IDs. |
+| **Em Cartaz** | `test_now_playing.py` | Validação de filmes "Now Playing" e status code. |
+| **Séries de TV** | `test_changes.py` | Consulta de lista de mudanças em séries de TV. |
+| **Favoritos** | `test_favorite_movies.py` | Validação da lista de favoritos do usuário. |
+| **Listas Pessoais** | `test_list.py` | Testes de endpoints de conta e criação de listas. |
 
 ## ⚙️ Como Rodar o Projeto Localmente
 
-### 1. Clone o repositório
-```bash
-git clone [https://github.com/ErickTempest1/Pytest.git](https://github.com/ErickTempest1/Pytest.git)
-cd Pytest
+### Pré-requisitos
+* Python instalado.
+* Uma chave de API (Token) do TMDB.
+
+### Passo a Passo
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/ErickTempest1/TestPython.git](https://github.com/ErickTempest1/TestPython.git)
+    cd TestPython
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    pip install requests pytest
+    ```
+
+3.  **Configure o Token:**
+    Abra os arquivos de teste e insira seu `Bearer Token` na variável `TOKEN`.
+    > **Nota de Segurança:** O Token foi removido deste repositório por questões de segurança.
+
+4.  **Execute os testes:**
+    Para rodar todos os testes de uma vez:
+    ```bash
+    pytest -v
+    ```
+
+## 📄 BDD (Behavior Driven Development)
+
+Os cenários de teste também foram documentados em formato **Gherkin** no arquivo `Tcs-ErickVitor.feature`, facilitando o entendimento das regras de negócio.
+
+---
+**Autor:** Erick Vitor
+Desenvolvido como parte de estudos em Automação de Testes.
