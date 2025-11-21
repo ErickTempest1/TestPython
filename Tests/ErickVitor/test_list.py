@@ -1,5 +1,7 @@
 import requests
 
+url = "https://api.themoviedb.org/3/movie/movie_id/lists?language=en-US&page=1"
+
 headers = {
     "accept": "application/json",
     "content-type": "application/json",
