@@ -16,5 +16,3 @@ def test_can_get_first_now_playing_movie_details():
     url = "https://api.themoviedb.org/3/movie/534649?language=en-US"
     response = requests.get(url, headers=headers)
     assert response.status_code == 200
-
-    
