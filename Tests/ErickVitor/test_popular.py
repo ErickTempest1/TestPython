@@ -16,3 +16,16 @@ def test_can_get_first_popular_movie_details():
     url = "https://api.themoviedb.org/3/movie/634649?language=en-US"
     response = requests.get(url, headers=headers)
     assert response.status_code == 200
+
+def test_can_post_popular_movie_rating():
+    url ="https://api.themoviedb.org/3/movie/634649/rating"
+    payload ={
+        "value":7.5
+    }
+    response = requests.post(url, headers=headers, json=payload)
+    assert response.status_code == 201
+
+def test_can_delete_popular_movie_rating():
+    url = "https://api.themoviedb.org/3/movie/634649/rating"
+    response = requests.delete(url, headers=headers)
+    assert response.status_code == 200
