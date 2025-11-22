@@ -1,36 +1,49 @@
 # 🎬 Automação de Testes de API - TMDB
 
-Este repositório contém um projeto de **QA Estudante (Backend)** desenvolvido para validar os endpoints da API do [The Movie Database (TMDB)](https://www.themoviedb.org/).
+Este repositório contém um projeto robusto de **QA Automation (Backend)** desenvolvido para validar a API do [The Movie Database (TMDB)](https://www.themoviedb.org/).
 
-O objetivo foi criar uma suíte de testes regressivos utilizando **Python** e **Pytest**, garantindo a integridade de dados de filmes, séries e funcionalidades de conta.
+O projeto evoluiu de simples consultas para fluxos completos de **CRUD (Create, Read, Update, Delete)**, validação de regras de negócio, manipulação de sessões e tratamento de dados temporais.
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Stack Tecnológica
 
 * **Linguagem:** Python 3.12+
-* **Framework de Teste:** Pytest
-* **Requisições HTTP:** Requests Library
+* **Test Runner:** Pytest
+* **HTTP Client:** Requests
 * **Controle de Versão:** Git & GitHub
-* **Padrão de Projeto:** Testes funcionais isolados por domínio.
+* **Conceitos Aplicados:** REST API, CRUD, Auth (Bearer & Guest), Datetime Validation.
 
-## 🧪 Cobertura dos Testes
+## 🧪 Cobertura e Cenários de Teste
 
-O projeto valida os principais fluxos da API, incluindo:
+A suíte de testes garante a integridade dos seguintes fluxos:
 
-| Domínio | Arquivo de Teste | Cenários Cobertos |
-| :--- | :--- | :--- |
-| **Filmes Populares** | `test_popular.py` | Listagem de populares e validação dinâmica de IDs. |
-| **Em Cartaz** | `test_now_playing.py` | Validação de filmes "Now Playing" e status code. |
-| **Séries de TV** | `test_changes.py` | Consulta de lista de mudanças em séries de TV. |
-| **Favoritos** | `test_favorite_movies.py` | Validação da lista de favoritos do usuário. |
-| **Listas Pessoais** | `test_list.py` | Testes de endpoints de conta e criação de listas. |
+| Arquivo de Teste | Funcionalidades Testadas | Verbos HTTP |
+| :--- | :--- | :---: |
+| `test_movie_details.py` | **Filmes Específicos:** Consulta dados do filme "Clube da Luta", envia uma avaliação (Rating) e remove essa avaliação. | `GET`, `POST`, `DELETE` |
+| `test_tv_rating.py` | **Séries de TV:** Consulta dados de "Game of Thrones", avalia a série e remove a avaliação posteriormente. | `GET`, `POST`, `DELETE` |
+| `test_now_playing.py` | **Em Cartaz:** Valida a lista de filmes nos cinemas, seleciona um filme e executa o ciclo de avaliação/remoção. | `GET`, `POST`, `DELETE` |
+| `test_popular.py` | **Populares:** Valida a lista de filmes populares e garante que o fluxo de avaliação funciona para filmes em destaque. | `GET`, `POST`, `DELETE` |
+| `test_session.py` | **Autenticação & Sessão:** Criação de Sessão de Convidado (Guest), validação matemática de data de expiração (UTC Timezone) e fluxo de avaliação usando ID da sessão na URL. | `GET`, `POST`, `DELETE` |
 
-## ⚙️ Como Rodar o Projeto Localmente
+## 🧠 Destaques Técnicos
 
-### Pré-requisitos
-* Python instalado.
-* Uma chave de API (Token) do TMDB.
+### 1. Ciclo de Vida do Dado (CRUD)
+Diferente de testes simples de leitura, este projeto garante a limpeza dos dados.
+* **Criação:** Envia `POST` para dar nota a um filme (Status 201).
+* **Limpeza:** Envia `DELETE` logo em seguida para não sujar a base de dados (Status 200).
 
-### Passo a Passo
+### 2. Validação de Sessão e Datas
+No arquivo `test_session.py`, foi implementada uma lógica avançada para:
+* Gerar uma `Guest Session`.
+* Validar se o ID retornado não é nulo.
+* Converter a data de expiração (`expires_at`) vinda da API para objeto `datetime`.
+* Comparar com o horário atual usando **Timezone Aware Objects (UTC)** para evitar erros de fuso horário.
+
+### 3. Autenticação Dinâmica
+Os testes suportam dois tipos de autenticação:
+* **Bearer Token:** Via Headers para endpoints protegidos.
+* **Query Params:** Injeção dinâmica do `guest_session_id` na URL para ações de convidado.
+
+## ⚙️ Como Rodar Localmente
 
 1.  **Clone o repositório:**
     ```bash
@@ -44,19 +57,14 @@ O projeto valida os principais fluxos da API, incluindo:
     ```
 
 3.  **Configure o Token:**
-    Abra os arquivos de teste e insira seu `Bearer Token` na variável `TOKEN`.
-    > **Nota de Segurança:** O Token foi removido deste repositório por questões de segurança.
+    Substitua a variável `TOKEN` nos arquivos pelo seu Token de Leitura da API do TMDB.
 
 4.  **Execute os testes:**
-    Para rodar todos os testes de uma vez:
     ```bash
+    # Para rodar todos e ver o output detalhado
     pytest -v
     ```
 
-## 📄 BDD (Behavior Driven Development)
-
-Os cenários de teste também foram documentados em formato **Gherkin** no arquivo `Tcs-ErickVitor.feature`, facilitando o entendimento das regras de negócio.
-
 ---
 **Autor:** Erick Vitor
-Desenvolvido como parte de estudos em Automação de Testes.
+*Projeto desenvolvido com foco em boas práticas de automação e arquitetura de testes.*
