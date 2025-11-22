@@ -1,35 +1,56 @@
 # language: pt
 
-Funcionalidade: Validação da API do TMDB
-  Como um QA Estudante Erick Vitor
-  Quero validar os endpoints de Filmes e Séries
-  Para garantir que a API retorna os dados corretos (Status 200)
+Funcionalidade: Automação Avançada da API TMDB (CRUD e Sessões)
+  Como o QA Estudante Erick Vitor
+  Quero validar o ciclo completo de vida dos dados (Criar, Ler, Deletar)
+  Para garantir que a API processa avaliações e sessões corretamente
 
   Contexto:
     Dado que possuo um Token de acesso válido
 
-  Cenário: Verificar mudanças em Séries de TV (Snippet 1)
-    Quando eu consulto as mudanças da série com ID 1399
+  Cenário: Fluxo de Detalhes e Avaliação de Filme (Snippet 1)
+    Quando eu consulto os detalhes do filme "Clube da Luta" (ID 550)
     Então o código de status deve ser 200
+    E eu envio uma avaliação de nota 8.5 para este filme
+    Então o código de status deve ser 201 (Criado)
+    E eu deleto a avaliação enviada
+    Então o código de status deve ser 200 (Sucesso)
 
-  Cenário: Verificar Filmes Favoritos (Snippet 2)
-    Quando eu consulto a lista de filmes favoritos da conta
-    Então o código de status deve ser 200
-    E eu consulto os detalhes do filme "Clube da Luta" (ID 550)
-    Então o código de status deve ser 200
-
-  Cenário: Verificar Listas da Conta (Snippet 3)
-    Quando eu consulto as listas criadas na minha conta
-    Então o código de status deve ser 200
-
-  Cenário: Verificar Filmes em Cartaz "Now Playing" (Snippet 4)
+  Cenário: Fluxo de Filmes em Cartaz "Now Playing" (Snippet 2)
     Quando eu consulto a lista de filmes em cartaz
     Então o código de status deve ser 200
-    E eu consulto os detalhes de um filme específico em cartaz
+    E eu busco os detalhes do filme específico (ID 534649)
+    Então o código de status deve ser 200
+    E eu envio uma avaliação de nota 8.0 para este filme
+    Então o código de status deve ser 201
+    E eu deleto a avaliação enviada
     Então o código de status deve ser 200
 
-  Cenário: Verificar Filmes Populares (Snippet 5)
+  Cenário: Fluxo de Filmes Populares (Snippet 3)
     Quando eu consulto a lista de filmes populares
     Então o código de status deve ser 200
-    E eu consulto os detalhes do filme mais popular
+    E eu busco os detalhes do filme específico (ID 634649)
+    Então o código de status deve ser 200
+    E eu envio uma avaliação de nota 7.5 para este filme
+    Então o código de status deve ser 201
+    E eu deleto a avaliação enviada
+    Então o código de status deve ser 200
+
+  Cenário: Sessão de Convidado e Validação de Data (Snippet 4)
+    Quando eu crio uma nova Sessão de Convidado
+    Então o código de status deve ser 200
+    E o ID da sessão (guest_session_id) não deve ser nulo
+    E a data de expiração deve ser maior que a data atual (UTC)
+    
+  Cenário: Avaliação via Sessão de Convidado (Snippet 4 - Parte 2)
+    Dado que tenho uma Sessão de Convidado ativa
+    Quando eu avalio um filme usando o ID da sessão na URL
+    Então o código de status deve ser 201
+    E eu deleto a avaliação usando o ID da sessão na URL
+    Então o código de status deve ser 200
+
+  Cenário: Avaliação de Séries de TV (Extra)
+    Quando eu envio uma avaliação para a série "Game of Thrones" (ID 1399)
+    Então o código de status deve ser 201
+    E eu deleto a avaliação da série
     Então o código de status deve ser 200
