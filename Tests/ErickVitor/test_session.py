@@ -1,5 +1,4 @@
 import requests
-from datetime import datetime, timezone
 
 url = "https://api.themoviedb.org/3/authentication/guest_session/new"
 
