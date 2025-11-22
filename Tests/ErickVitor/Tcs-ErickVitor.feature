@@ -1,5 +1,3 @@
-# language: pt
-
 Funcionalidade: Automação Avançada da API TMDB (CRUD e Sessões)
   Como o QA Estudante Erick Vitor
   Quero validar o ciclo completo de vida dos dados (Criar, Ler, Deletar)

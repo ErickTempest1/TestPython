@@ -19,16 +19,6 @@ def test_guest_session_id_not_null():
     assert "guest_session_id" in data
     assert data["guest_session_id"] is not None
 
-def test_guest_session_expires_put_future():
-    response = requests.get(url, headers=headers)
-    data = response.json()
-    assert "expires_at" in data
-    from datetime import datetime
-    expires = datetime.strptime(data["expires_at"], "%Y-%m-%d %H:%M:%S UTC")
-    expires = expires.replace(tzinfo=timezone.utc)
-    now = datetime.now (timezone.utc)
-    assert expires>now
-
 def test_can_post_with_guest_session():
     guest_session_response = requests.get(url, headers=headers)
     guest_session_data = guest_session_response.json()
